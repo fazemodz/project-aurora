@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  favoriteIds    String[]  @db.ObjectId
+
+  accounts        Account[]
+  IsUserBanned    Boolean   @default(false)
+  posts           String[]
+  forums          String[]
+  comments        String[]
+  ApiKey          String?   @unique
+  FirstTimeLoggin Boolean   @default(true)
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Post {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  title            String
+  ForumPostedName  String
+  ForumPostedURL   String
+  content          String
+  Likes            Int
+  comments         String[]
+  NumberOfComments Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  User             String
+  userId           String   @db.ObjectId
+  Forum            String
+  forumId          String   @db.ObjectId
+}
+
+model Forum {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  ForumName     String
+  ForumURL      String
+  NumberOfPosts Int
+  IsVerified    Boolean  @default(false)
+  IsBanned      Boolean  @default(false)
+  posts         String[]
+  users         String[]
+  createdAt     DateTime @default(now())
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  Likes     Int
+  authorid  String   @db.ObjectId
+  postid    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  Author    String
+  userId    String   @db.ObjectId
+  postId    String   @db.ObjectId
+}
