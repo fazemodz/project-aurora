@@ -1,6 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Navbar from './components/navbar/Navbar'
+import Useronboarding from './components/onboarding/Useronboarding'
 const inter = Inter({ subsets: ['latin'] })
 import getCurrentUser from '@/app/actions/getCurrentUser';
 export const metadata = {
@@ -19,7 +20,13 @@ export default async function RootLayout({
       <body className="min-h-screen">
        {/* @ts-ignore */}
         <Navbar currentUser={currentUser} />
+        {!currentUser == null && currentUser?.FirstTimeLoggin == true ? (
+          <Useronboarding currentUser={currentUser} />
+          ):(
+            <></>
+          )}
         {children}
+
         </body>
     </html>
   )

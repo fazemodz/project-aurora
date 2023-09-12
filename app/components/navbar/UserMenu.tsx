@@ -3,7 +3,7 @@ import React from 'react'
 import { SafeUser } from '@/app/types';
 import { useCallback, useState } from "react";
 import {DiGithubBadge} from 'react-icons/di'
-import { signIn } from "next-auth/react";
+import { signIn} from "next-auth/react";
 interface UserMenuProps {
   currentUser?: SafeUser | null;
 }
@@ -31,7 +31,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
               </a>
             </li>
             <li><a href="/Settings">Settings</a></li>
-            <li><a>Logout</a></li></>) : (
+            <li><a >Logout</a></li></>) : (
           <>
             <li>
               {/* register modal */}

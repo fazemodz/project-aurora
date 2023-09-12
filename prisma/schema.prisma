@@ -25,6 +25,7 @@ model User {
   comments        String[]
   ApiKey          String?   @unique
   FirstTimeLoggin Boolean   @default(true)
+  HasCompletedOnboarding Boolean @default(false)
 }
 
 model Account {
