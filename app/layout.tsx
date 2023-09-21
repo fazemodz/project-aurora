@@ -4,11 +4,18 @@ import Navbar from './components/navbar/Navbar'
 import Useronboarding from './components/onboarding/Useronboarding'
 const inter = Inter({ subsets: ['latin'] })
 import getCurrentUser from '@/app/actions/getCurrentUser';
+import { SafeUser } from './types'
 export const metadata = {
   title: 'Project Aurora',
   description: '',
 }
-
+const TriggerOnboarding = (currentUser:SafeUser) => {
+  if(currentUser != null){
+    if(currentUser.HasCompletedOnboarding == false){
+        return <Useronboarding currentUser={currentUser} />
+    }
+  }
+}
 export default async function RootLayout({
   children,
 }: {
@@ -20,12 +27,7 @@ export default async function RootLayout({
       <body className="min-h-screen">
         {/* @ts-ignore */}
         <Navbar currentUser={currentUser} />
-        {currentUser == null && currentUser.FirstTimeLoggin == true ? (
-          <></>
-        ) : (
-          /* @ts-ignore */
-          <Useronboarding currentUser={currentUser} />
-        )}
+        {TriggerOnboarding(currentUser)}
         {children}
 
       </body>
