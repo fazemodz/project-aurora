@@ -1,7 +1,7 @@
 import React from 'react'
-import getCurrentUser from '@/app/actions/getCurrentUser';
+import getcurrentuser from '@/app/actions/getcurrentuser';
 export default function UserSettings() {
-  const currentUser = getCurrentUser();
+  const currentUser = getcurrentuser();
   return (
     <div className='flex w-full'>
       <ul className="menu bg-base-200 w-56  h-2/4 rounded-box">

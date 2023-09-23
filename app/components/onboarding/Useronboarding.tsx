@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { SafeUser } from "@/app/types";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link } from "@nextui-org/react";
+import { Textarea, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link } from "@nextui-org/react";
 interface UseronboardingProps {
   currentUser?: SafeUser | null;
 }
@@ -9,14 +9,17 @@ const Useronboarding: React.FC<UseronboardingProps> = ({
   currentUser,
 }) => {
   useEffect(() => {
-  const url = window.location.href;
+    const url = window.location.href;
     if (url == "http://localhost:3000") {
-      setShouldShow(true)
+      setShouldShow(true);
+    }else{
+      setShouldShow(false);
     }
   }, [])
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [shouldShow, setShouldShow] = useState(true);
   const [newUsername, setNewUsername] = useState("");
+  const [newBio, setnewBio] = useState("");
   return (
     <Modal
       isOpen={shouldShow}
@@ -37,6 +40,17 @@ const Useronboarding: React.FC<UseronboardingProps> = ({
                 placeholder="Enter your new username"
                 variant="bordered"
                 onChange={(e) => { setNewUsername(e.target.value) }}
+              />
+              <Textarea
+              className="w-full flex flex-col gap-2 max-w-[400px]"
+                isInvalid={true}
+                variant="bordered"
+                label="Profile bio"
+                labelPlacement="outside"
+                placeholder="Enter your bio here"
+                defaultValue=""
+                onChange={(e) => { setnewBio(e.target.value) }}
+               
               />
             </ModalBody>
             <ModalFooter>
