@@ -5,6 +5,7 @@ import {
   Navbar, Input, Button, NavbarBrand, NavbarContent, NavbarItem,
   Link, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar
 } from "@nextui-org/react";
+import { MouseEventHandler, useEffect } from "react";
 const NotLoggedInUserActionBtn = () => {
   return (
     <>
@@ -25,41 +26,59 @@ interface NavbarProps {
 const LoggedInUserActionBtn= (
   currentUser: SafeUser | null, 
 ) => {
-  return (
-    <Dropdown placement="bottom-end">
-      <DropdownTrigger>
-        <Avatar
-          isBordered
-          as="button"
-          className="transition-transform"
-          color="secondary"
-          name={currentUser?.name}
-          size="sm"
-          src={currentUser?.image}
-        />
-      </DropdownTrigger>
-      <DropdownMenu aria-label="Profile Actions" variant="flat">
-        <DropdownItem key="profile" className="h-14 gap-2">
-          <p className="font-semibold">Signed in as</p>
-          <p className="font-semibold">{currentUser?.email}</p>
-        </DropdownItem>
-        <DropdownItem key="settings">My Settings</DropdownItem>
-        <DropdownItem key="team_settings">Team Settings</DropdownItem>
-        <DropdownItem key="analytics">Analytics</DropdownItem>
-        <DropdownItem key="system">System</DropdownItem>
-        <DropdownItem key="configurations">Configurations</DropdownItem>
-        <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-        {/* @ts-ignore */}
-        <DropdownItem key="logout" onClick={signOut} color="danger">
-          Log Out
-        </DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
-  )
+    return (
+      <Dropdown placement="bottom-end">
+        <DropdownTrigger>
+          <Avatar
+            isBordered
+            as="button"
+            className="transition-transform"
+            color="secondary"
+            // @ts-ignore
+            name={currentUser?.name}
+            size="sm"
+            // @ts-ignore
+            src={currentUser?.image} />
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Profile Actions" variant="flat">
+          <DropdownItem key="profile" className="h-14 gap-2">
+            <p className="font-semibold">Signed in as</p>
+            <p className="font-semibold">{currentUser?.email}</p>
+          </DropdownItem>
+          <DropdownItem key="Profile" onClick={() => redirectUser("Profile")}>Profile</DropdownItem>
+          <DropdownItem key="settings"onClick={() => redirectUser("Settings")}>Settings</DropdownItem>
+          {/* <DropdownItem key="analytics">Analytics</DropdownItem>
+              <DropdownItem key="system">System</DropdownItem>
+              <DropdownItem key="configurations">Configurations</DropdownItem>
+              <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem> */}
+          {/* @ts-ignore */}
+          <DropdownItem key="logout" onClick={signOut} color="danger">
+            Log Out
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    );
+  }
+function redirectUser(Location: string) {
+  switch (Location) {
+    case "Settings":
+      window.location.replace("/Settings");
+      break;
+    case "Profile":
+      window.location.replace("/Profile");
+      break;
+    default:
+      break;
+  }
 }
 const MainNavbar: React.FC<NavbarProps> = ({
   currentUser,
 }) => {
+  useEffect(() => {
+    if(currentUser != null && window.location.href == "http://localhost:3000/Login"){
+      window.location.replace("/")
+    }
+  }, [])
   return (
     <Navbar>
       <NavbarBrand>

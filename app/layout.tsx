@@ -9,13 +9,7 @@ export const metadata = {
   title: 'Project Aurora',
   description: '',
 }
-const TriggerOnboarding = (currentUser:SafeUser) => {
-  if(currentUser != null){
-    if(currentUser.HasCompletedOnboarding == false){
-        return <Useronboarding currentUser={currentUser} />
-    }
-  }
-}
+
 export default async function RootLayout({
   children,
 }: {
@@ -27,7 +21,7 @@ export default async function RootLayout({
       <body className="min-h-screen">
         
         <MainNavbar currentUser={currentUser} />
-        {/* {TriggerOnboarding(currentUser)} */}
+        <Useronboarding currentUser={currentUser} />
         {children}
       </body>
     </html>

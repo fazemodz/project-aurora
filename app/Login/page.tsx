@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { DiGithubBadge } from 'react-icons/di'
 import { signIn } from "next-auth/react";
 import { Card, Spacer, Button, CardHeader, CardBody, CardFooter, Divider, Link, Image } from "@nextui-org/react";

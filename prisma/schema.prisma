@@ -17,7 +17,7 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   favoriteIds    String[]  @db.ObjectId
-  Bio           String?
+  Bio            String?
  
   accounts        Account[]
   IsUserBanned    Boolean   @default(false)
