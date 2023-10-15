@@ -47,10 +47,6 @@ const LoggedInUserActionBtn= (
           </DropdownItem>
           <DropdownItem key="Profile" onClick={() => redirectUser("Profile")}>Profile</DropdownItem>
           <DropdownItem key="settings"onClick={() => redirectUser("Settings")}>Settings</DropdownItem>
-          {/* <DropdownItem key="analytics">Analytics</DropdownItem>
-              <DropdownItem key="system">System</DropdownItem>
-              <DropdownItem key="configurations">Configurations</DropdownItem>
-              <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem> */}
           {/* @ts-ignore */}
           <DropdownItem key="logout" onClick={signOut} color="danger">
             Log Out

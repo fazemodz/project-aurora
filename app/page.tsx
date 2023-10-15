@@ -1,8 +1,13 @@
 'use client'
-import Image from 'next/image'
-import { useEffect } from 'react'
+import {Card, CardBody, Link} from "@nextui-org/react";
 export default function Home() {
   return (
-    null
+    <Card>
+    <CardBody>
+      <div className="text-center">
+      <p>It looks like you haven't completed your onboarding... <Link href="#" color="danger">Danger</Link></p>
+      </div>
+    </CardBody>
+  </Card>
   )
 }
