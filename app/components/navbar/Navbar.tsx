@@ -71,9 +71,7 @@ const MainNavbar: React.FC<NavbarProps> = ({
   currentUser,
 }) => {
   useEffect(() => {
-    if(currentUser != null && window.location.href == "http://localhost:3000/Login"){
-      window.location.replace("/")
-    }
+    
   }, [])
   return (
     <Navbar>

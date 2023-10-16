@@ -6,7 +6,7 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 export async function POST(req: Request){
     const currentUser = await getCurrentUser();
     const body = await req.json();
-    const {newUsername} = body;
+    const {newUsername, newBio} = body;
     const oldUsername = currentUser?.name;
     // error handling cuz i care now i guess
     if(!currentUser) return NextResponse.redirect("/login");
@@ -16,10 +16,12 @@ export async function POST(req: Request){
     // update the username
     await prisma.user.update({
         where: {
-            name: currentUser.name
+            name: currentUser.name,
+            Bio: currentUser.Bio
         },
         data: {
-            name: newUsername
+            name: newUsername,
+            Bio: newBio
         }
     });
 }
