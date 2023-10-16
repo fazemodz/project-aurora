@@ -5,7 +5,7 @@ export default function Home() {
     <Card>
     <CardBody>
       <div className="text-center">
-      <p>It looks like you haven't completed your onboarding... <Link href="#" color="danger">Danger</Link></p>
+      <p>It looks like you haven't completed your onboarding... <Link href="/onboarding" color="danger">Danger</Link></p>
       </div>
     </CardBody>
   </Card>

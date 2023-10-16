@@ -8,26 +8,25 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  name           String?
-  email          String?   @unique
-  emailVerified  DateTime?
-  image          String?
-  hashedPassword String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  favoriteIds    String[]  @db.ObjectId
-  Bio            String?
- 
-  accounts        Account[]
-  IsUserBanned    Boolean   @default(false)
-  posts           String[]
-  forums          String[]
-  comments        String[]
-  ApiKey          String?   @unique
-  FirstTimeLoggin Boolean   @default(true)
-  HasCompletedOnboarding Boolean @default(false)
-  HasOptedInToBetaFeatures Boolean @default(false)
+  id                          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name                        String?
+  email                       String?   @unique
+  emailVerified               DateTime?
+  image                       String?
+  hashedPassword              String?
+  createdAt                   DateTime  @default(now())
+  updatedAt                   DateTime  @updatedAt
+  favoriteIds                 String[]  @db.ObjectId
+  Bio                         String?   @default("No Bio yet")
+  accounts                    Account[]
+  IsUserBanned                Boolean   @default(false)
+  posts                       String[]
+  forums                      String[]
+  comments                    String[]
+  ApiKey                      String?   @unique
+  FirstTimeLoggin             Boolean   @default(true)
+  HasCompletedOnboarding      Boolean   @default(false)
+  HasOptedInToBetaFeatures    Boolean   @default(false)
   WhatFeaturesUserHasAccessTo String[]
 }
 

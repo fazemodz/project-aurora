@@ -19,9 +19,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen">
-        
         <MainNavbar currentUser={currentUser} />
-        <Useronboarding currentUser={currentUser} />
         {children}
       </body>
     </html>
